@@ -1,9 +1,10 @@
 package com.safetynet.alerts.service;
 
-import lombok.Data;
+
+import com.safetynet.alerts.service.interfaces.IMedicalRecordService;
 import org.springframework.stereotype.Service;
 
-@Data
+
 @Service
-public class MedicalRecordService {
+public class MedicalRecordService implements IMedicalRecordService {
 }

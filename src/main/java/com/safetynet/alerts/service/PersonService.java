@@ -1,9 +1,6 @@
 package com.safetynet.alerts.service;
 
-import lombok.Data;
-import org.springframework.stereotype.Service;
+import com.safetynet.alerts.service.interfaces.IPersonService;
 
-@Data
-@Service
-public class PersonService {
+public class PersonService implements IPersonService {
 }

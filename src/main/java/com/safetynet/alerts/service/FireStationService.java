@@ -1,9 +1,8 @@
 package com.safetynet.alerts.service;
 
-import lombok.Data;
-import org.springframework.stereotype.Service;
+import com.safetynet.alerts.service.interfaces.IFireStationService;
 
-@Data
-@Service
-public class FireStationService {
+public class FireStationService implements IFireStationService {
+
+
 }
