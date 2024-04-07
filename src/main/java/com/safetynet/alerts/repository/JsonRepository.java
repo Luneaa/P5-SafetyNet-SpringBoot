@@ -54,4 +54,56 @@ public class JsonRepository implements IDataRepository {
         ObjectReader medicalRecordsReader = mapper.readerFor(new TypeReference<List<MedicalRecord>>() {});
         this.medicalRecords = medicalRecordsReader.readValue(medicalRecordsNode);
     }
+
+    // -- Persons --
+
+    // Create
+
+    @Override
+    public Person addPerson(Person person) {
+        // Check if persons already exists
+        if (this.persons.stream().anyMatch(p -> p.getFirstName().equals(person.getFirstName()) && p.getLastName().equals(person.getLastName()))){
+            // Person already exists, ignore add and return null
+            // TODO : Add log
+            return null;
+        }
+
+        // TODO : Add log
+        this.persons.add(person);
+
+        return person;
+    }
+
+    // Read
+
+    @Override
+    public List<Person> getPersons() {
+        return this.persons;
+    }
+
+    // Update
+
+    @Override
+    public Person udpatePerson(Person person) {
+        // TODO : implement update
+        return person;
+    }
+
+    // Delete
+
+    @Override
+    public void deletePerson(String firstName, String lastName){
+        // Get person to delete
+        var toDelete = this.persons.stream().filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName)).findFirst().orElse(null);
+
+        if (toDelete == null) {
+            // No person matched
+            // TODO : Add log
+            return;
+        }
+
+        // Remove the found person
+        // TODO : Add log
+        this.persons.remove(toDelete);
+    }
 }

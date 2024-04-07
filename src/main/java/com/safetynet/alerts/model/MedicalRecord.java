@@ -13,5 +13,25 @@ public class MedicalRecord {
 
     private String[] medications;
 
-    private  String[] allergies;
+    private String[] allergies;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getBirthdate() {
+        return birthdate;
+    }
+
+    public String[] getMedications() {
+        return medications;
+    }
+
+    public String[] getAllergies() {
+        return allergies;
+    }
 }
