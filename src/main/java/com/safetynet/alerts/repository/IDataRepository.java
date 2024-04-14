@@ -10,6 +10,8 @@ public interface IDataRepository {
 
     List<Person> getPersons();
 
+    Person getPerson(String firstName, String lastName);
+
     Person udpatePerson(Person person);
 
     void deletePerson(String firstName, String lastName);
