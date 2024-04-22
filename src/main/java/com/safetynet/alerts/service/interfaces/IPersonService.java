@@ -11,4 +11,10 @@ public interface IPersonService {
     public List<Person> getPersons();
 
     public Person getPerson(String firstName, String lastName);
+
+    Person addPerson(Person person);
+
+    Person updatePerson(Person person);
+
+    void deletePerson(String firstName, String lastName);
 }

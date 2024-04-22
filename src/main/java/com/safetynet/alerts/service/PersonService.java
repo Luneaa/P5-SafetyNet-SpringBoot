@@ -23,4 +23,17 @@ public class PersonService implements IPersonService {
     public Person getPerson(String firstName, String lastName){
         return this.repository.getPerson(firstName, lastName);
     }
+
+    public Person addPerson(Person newPerson) {
+        return this.repository.addPerson(newPerson);
+    }
+
+    public Person updatePerson(Person person) {
+        return this.repository.udpatePerson(person);
+    }
+
+
+    public void deletePerson(String firstName, String lastName) {
+        this.repository.deletePerson(firstName, lastName);
+    }
 }

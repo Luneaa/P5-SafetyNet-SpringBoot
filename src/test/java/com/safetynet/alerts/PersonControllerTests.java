@@ -1,5 +1,7 @@
 package com.safetynet.alerts;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.safetynet.alerts.controller.PersonController;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.service.PersonService;
@@ -15,7 +17,7 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = PersonController.class)
@@ -26,6 +28,9 @@ class PersonControllerTests {
 
     @MockBean
     private PersonService personService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Test
     void getPersons() throws Exception {
@@ -58,5 +63,36 @@ class PersonControllerTests {
 
         mockMvc.perform(get("/persons/{firstName}/{lastName}", "John", "Doe").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    void addPerson() throws Exception {
+        var newPerson = new Person("John", "Doe", "2 Rue des Sapins", "Pau", "1234", "+33456787512", "johndoe@gmail.com");
+        when(personService.addPerson(any(Person.class))).thenReturn(newPerson);
+
+        mockMvc.perform(post("/persons", newPerson)
+                .content(objectMapper.writeValueAsString(newPerson))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void updatePerson() throws Exception {
+        var updatePeron = new Person("John", "Doe", "2 Rue des Sapins", "Pau", "1234", "+33456787512", "johndoe@gmail.com");
+        when(personService.updatePerson(any(Person.class))).thenReturn(updatePeron);
+
+        mockMvc.perform(put("/persons", updatePeron)
+                        .content(objectMapper.writeValueAsString(updatePeron))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void deletePerson() throws Exception {
+        mockMvc.perform(delete("/persons/{firstName}/{lastName}", "John", "Doe").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
     }
 }

@@ -4,9 +4,7 @@ import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.service.interfaces.IPersonService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,5 +37,26 @@ public class PersonController {
         }
 
         return new ResponseEntity<>(person, HttpStatus.OK);
+    }
+
+    @PostMapping("/persons")
+    public ResponseEntity<Person> postPerson(@RequestBody Person person){
+        var newPerson = personService.addPerson(person);
+
+        return new ResponseEntity<>(newPerson, HttpStatus.OK);
+    }
+
+    @PutMapping("/persons")
+    public ResponseEntity<Person> putPerson(@RequestBody Person person){
+        var updatedPerson = personService.updatePerson(person);
+
+        return new ResponseEntity<>(updatedPerson, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/persons/{firstName}/{lastName}")
+    public ResponseEntity<Void> deletePerson(@PathVariable ("firstName") String firstName, @PathVariable("lastName") String lastName){
+        personService.deletePerson(firstName, lastName);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
