@@ -111,4 +111,104 @@ public class JsonRepository implements IDataRepository {
         // TODO : Add log
         this.persons.remove(toDelete);
     }
+
+    @Override
+    public List<FireStation> getFireStations() {
+        return this.fireStations;
+    }
+
+    @Override
+    public FireStation getFireStation(String address, String station) {
+        return this.fireStations.stream().filter(p -> p.getAddress().equals(address) && p.getStation().equals(station)).findFirst().orElse(null);
+    }
+
+    @Override
+    public FireStation addFireStation(FireStation newFireStation) {
+        // Check if fire station already exists
+        if (this.fireStations.stream().anyMatch(f -> f.getAddress().equals(newFireStation.getAddress()) && f.getStation().equals(newFireStation.getStation()))){
+            // Fire station already exists, ignore add and return null
+            // TODO : Add log
+            return null;
+        }
+
+        // TODO : Add log
+        this.fireStations.add(newFireStation);
+
+        return newFireStation;
+    }
+
+    @Override
+    public FireStation udpateFireStation(FireStation fireStation) {
+        // TODO : implement update
+        return fireStation;
+    }
+
+    @Override
+    public void deleteFireStation(String address, String station) {
+        // Get fire station to delete
+        var toDelete = this.fireStations.stream().filter(f -> f.getAddress().equals(address) && f.getStation().equals(station)).findFirst().orElse(null);
+
+        if (toDelete == null) {
+            // No fire station matched
+            // TODO : Add log
+            return;
+        }
+
+        // Remove the found fire station
+        // TODO : Add log
+        this.fireStations.remove(toDelete);
+    }
+
+    @Override
+    public MedicalRecord addMedicalRecord(MedicalRecord medicalRecord) {
+        // Check if medical record already exists
+        if (this.medicalRecords.stream().anyMatch(p -> p.getFirstName().equals(medicalRecord.getFirstName()) && p.getLastName().equals(medicalRecord.getLastName()))){
+            // Medical record already exists, ignore add and return null
+            // TODO : Add log
+            return null;
+        }
+
+        // TODO : Add log
+        this.medicalRecords.add(medicalRecord);
+
+        return medicalRecord;
+    }
+
+    // Read
+
+    @Override
+    public List<MedicalRecord> getMedicalRecords() {
+        return this.medicalRecords;
+    }
+
+    @Override
+    public MedicalRecord getMedicalRecordsForPerson(String firstName, String lastName) {
+        return this.medicalRecords.stream().filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName)).findFirst().orElse(null);
+    }
+
+    // Update
+
+    @Override
+    public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord) {
+        // TODO : implement update
+        return medicalRecord;
+    }
+
+    // Delete
+
+    @Override
+    public void deleteMedicalRecord(String firstName, String lastName){
+        // Get medical record to delete
+        var toDelete = this.medicalRecords.stream().filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName)).findFirst().orElse(null);
+
+        if (toDelete == null) {
+            // No medical record matched
+            // TODO : Add log
+            return;
+        }
+
+        // Remove the found medical record
+        // TODO : Add log
+        this.medicalRecords.remove(toDelete);
+    }
 }

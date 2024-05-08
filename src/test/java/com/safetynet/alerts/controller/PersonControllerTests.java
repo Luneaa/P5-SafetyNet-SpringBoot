@@ -1,4 +1,4 @@
-package com.safetynet.alerts;
+package com.safetynet.alerts.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,7 +36,7 @@ class PersonControllerTests {
     void getPersons() throws Exception {
         // Call "/persons" and get a list of persons with code 200
 
-        List<Person> persons = new ArrayList<Person>();
+        List<Person> persons = new ArrayList<>();
         persons.add(new Person("John", "Doe", "2 Rue des Sapins", "Pau", "1234", "+33456787512", "johndoe@gmail.com"));
         persons.add(new Person("Michel", "Vitesse", "54bis Rue du Papier", "Grenoble", "38000", "+3345678765465", "michelvitesse@gmail.com"));
 
@@ -79,11 +79,11 @@ class PersonControllerTests {
 
     @Test
     void updatePerson() throws Exception {
-        var updatePeron = new Person("John", "Doe", "2 Rue des Sapins", "Pau", "1234", "+33456787512", "johndoe@gmail.com");
-        when(personService.updatePerson(any(Person.class))).thenReturn(updatePeron);
+        Person updatePerson = new Person("John", "Doe", "2 Rue des Sapins", "Pau", "1234", "+33456787512", "johndoe@gmail.com");
+        when(personService.updatePerson(any(Person.class))).thenReturn(updatePerson);
 
-        mockMvc.perform(put("/persons", updatePeron)
-                        .content(objectMapper.writeValueAsString(updatePeron))
+        mockMvc.perform(put("/persons", updatePerson)
+                        .content(objectMapper.writeValueAsString(updatePerson))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());

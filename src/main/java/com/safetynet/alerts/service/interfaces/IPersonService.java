@@ -8,9 +8,9 @@ import java.util.List;
 // @Data
 @Service
 public interface IPersonService {
-    public List<Person> getPersons();
+    List<Person> getPersons();
 
-    public Person getPerson(String firstName, String lastName);
+    Person getPerson(String firstName, String lastName);
 
     Person addPerson(Person person);
 

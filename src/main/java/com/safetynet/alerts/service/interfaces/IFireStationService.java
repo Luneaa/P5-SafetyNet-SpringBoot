@@ -1,11 +1,22 @@
 package com.safetynet.alerts.service.interfaces;
 
 //import lombok.Data;
+import com.safetynet.alerts.model.FireStation;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 //@Data
-//@Service
+@Service
 public interface IFireStationService {
 
+    List<FireStation> getFireStations();
 
+    FireStation getFireStation(String address, String station);
+
+    FireStation addFireStation(FireStation fireStation);
+
+    FireStation updateFireStation(FireStation fireStation);
+
+    void deleteFireStation(String firstName, String lastName);
 }
