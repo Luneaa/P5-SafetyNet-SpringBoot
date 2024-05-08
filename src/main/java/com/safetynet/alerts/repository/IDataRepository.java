@@ -20,7 +20,7 @@ public interface IDataRepository {
 
     List<FireStation> getFireStations();
 
-    FireStation getFireStation(String address, String station);
+    FireStation getFireStation(String address);
 
     FireStation addFireStation(FireStation newFireStation);
 

@@ -18,8 +18,8 @@ public class FireStationService implements IFireStationService {
         return this.repository.getFireStations();
     }
 
-    public FireStation getFireStation(String address, String station){
-        return this.repository.getFireStation(address, station);
+    public FireStation getFireStation(String address){
+        return this.repository.getFireStation(address);
     }
 
     public FireStation addFireStation(FireStation newFireStation) {

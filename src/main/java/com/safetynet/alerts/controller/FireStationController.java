@@ -27,9 +27,9 @@ public class FireStationController {
         return new ResponseEntity<>(fireStations, HttpStatus.OK);
     }
 
-    @GetMapping("/fireStations/{address}/{station}")
-    public ResponseEntity<FireStation> getFireStation(@PathVariable("address") String address, @PathVariable("station") String station){
-        var fireStation = fireStationService.getFireStation(address, station);
+    @GetMapping("/fireStations/{address}")
+    public ResponseEntity<FireStation> getFireStation(@PathVariable("address") String address){
+        var fireStation = fireStationService.getFireStation(address);
 
         if (fireStation == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

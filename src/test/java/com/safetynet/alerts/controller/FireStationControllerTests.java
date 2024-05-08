@@ -57,11 +57,11 @@ class FireStationControllerTests {
 
     @Test
     void getFireStation() throws Exception {
-        // Call "/fireStations/{firstName}/{lastName}" and get a fireStation
+        // Call "/fireStations/{address}" and get a fireStation
         var fireStation = new FireStation("12 Rue du Persil Heureux", "1");
-        when(fireStationService.getFireStation(any(String.class), any(String.class))).thenReturn(fireStation);
+        when(fireStationService.getFireStation(any(String.class))).thenReturn(fireStation);
 
-        mockMvc.perform(get("/fireStations/{address}/{station}", "12 Rue du Persil Heureux", "1").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/fireStations/{address}", "12 Rue du Persil Heureux", "1").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 

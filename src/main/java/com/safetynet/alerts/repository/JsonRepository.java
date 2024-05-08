@@ -90,8 +90,20 @@ public class JsonRepository implements IDataRepository {
 
     @Override
     public Person udpatePerson(Person person) {
-        // TODO : implement update
-        return person;
+        Person personInList = this.persons.stream().filter(p -> p.getFirstName().equals(person.getFirstName()) && p.getLastName().equals(person.getLastName())).findFirst().orElse(null);
+
+        if (personInList == null){
+            // No person found to update
+            return null;
+        }
+
+        personInList.setAddress(person.getAddress());
+        personInList.setCity(person.getCity());
+        personInList.setZip(person.getZip());
+        personInList.setPhone(person.getPhone());
+        personInList.setEmail(person.getEmail());
+
+        return personInList;
     }
 
     // Delete
@@ -118,14 +130,14 @@ public class JsonRepository implements IDataRepository {
     }
 
     @Override
-    public FireStation getFireStation(String address, String station) {
-        return this.fireStations.stream().filter(p -> p.getAddress().equals(address) && p.getStation().equals(station)).findFirst().orElse(null);
+    public FireStation getFireStation(String address) {
+        return this.fireStations.stream().filter(p -> p.getAddress().equals(address)).findFirst().orElse(null);
     }
 
     @Override
     public FireStation addFireStation(FireStation newFireStation) {
         // Check if fire station already exists
-        if (this.fireStations.stream().anyMatch(f -> f.getAddress().equals(newFireStation.getAddress()) && f.getStation().equals(newFireStation.getStation()))){
+        if (this.fireStations.stream().anyMatch(f -> f.getAddress().equals(newFireStation.getAddress()))){
             // Fire station already exists, ignore add and return null
             // TODO : Add log
             return null;
@@ -139,8 +151,16 @@ public class JsonRepository implements IDataRepository {
 
     @Override
     public FireStation udpateFireStation(FireStation fireStation) {
-        // TODO : implement update
-        return fireStation;
+        FireStation fireStationInList = this.fireStations.stream().filter(p -> p.getAddress().equals(fireStation.getAddress())).findFirst().orElse(null);
+
+        if (fireStationInList == null){
+            // No fire station to update found
+            return null;
+        }
+
+        fireStationInList.setStation(fireStation.getStation());
+
+        return fireStationInList;
     }
 
     @Override
@@ -190,8 +210,18 @@ public class JsonRepository implements IDataRepository {
 
     @Override
     public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord) {
-        // TODO : implement update
-        return medicalRecord;
+        MedicalRecord medicalRecordInList = this.medicalRecords.stream().filter(p -> p.getFirstName().equals(medicalRecord.getFirstName()) && p.getLastName().equals(medicalRecord.getLastName())).findFirst().orElse(null);
+
+        if (medicalRecordInList == null) {
+            // No medical record found to update
+            return null;
+        }
+
+        medicalRecordInList.setBirthdate(medicalRecord.getBirthdate());
+        medicalRecordInList.setMedications(medicalRecord.getMedications());
+        medicalRecordInList.setAllergies(medicalRecord.getAllergies());
+
+        return medicalRecordInList;
     }
 
     // Delete
