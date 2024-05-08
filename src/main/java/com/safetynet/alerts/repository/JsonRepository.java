@@ -9,6 +9,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.model.MedicalRecord;
 import com.safetynet.alerts.model.Person;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
@@ -19,11 +21,13 @@ import java.util.List;
 @Repository
 public class JsonRepository implements IDataRepository {
 
-    private List<Person> persons;
+    private final List<Person> persons;
 
-    private List<FireStation> fireStations;
+    private final List<FireStation> fireStations;
 
-    private List<MedicalRecord> medicalRecords;
+    private final List<MedicalRecord> medicalRecords;
+
+    private static final Logger logger = LogManager.getLogger(JsonRepository.class);
 
     public JsonRepository() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
@@ -64,12 +68,12 @@ public class JsonRepository implements IDataRepository {
         // Check if persons already exists
         if (this.persons.stream().anyMatch(p -> p.getFirstName().equals(person.getFirstName()) && p.getLastName().equals(person.getLastName()))){
             // Person already exists, ignore add and return null
-            // TODO : Add log
+            logger.error("Person already exists addPerson stopped");
             return null;
         }
 
-        // TODO : Add log
         this.persons.add(person);
+        logger.info("Person added to the repository");
 
         return person;
     }
@@ -94,6 +98,7 @@ public class JsonRepository implements IDataRepository {
 
         if (personInList == null){
             // No person found to update
+            logger.error("Person to update not found updatePerson stopped");
             return null;
         }
 
@@ -102,6 +107,8 @@ public class JsonRepository implements IDataRepository {
         personInList.setZip(person.getZip());
         personInList.setPhone(person.getPhone());
         personInList.setEmail(person.getEmail());
+
+        logger.info("Person updated in the repository");
 
         return personInList;
     }
@@ -115,13 +122,14 @@ public class JsonRepository implements IDataRepository {
 
         if (toDelete == null) {
             // No person matched
-            // TODO : Add log
+            logger.error("Person to delete not found in the repository");
             return;
         }
 
         // Remove the found person
-        // TODO : Add log
+
         this.persons.remove(toDelete);
+        logger.info("Person deleted in the repository");
     }
 
     @Override
@@ -139,12 +147,12 @@ public class JsonRepository implements IDataRepository {
         // Check if fire station already exists
         if (this.fireStations.stream().anyMatch(f -> f.getAddress().equals(newFireStation.getAddress()))){
             // Fire station already exists, ignore add and return null
-            // TODO : Add log
+            logger.error("Fire station to add already found in repository, stopped addFireStation");
             return null;
         }
 
-        // TODO : Add log
         this.fireStations.add(newFireStation);
+        logger.info("Fire station added to the repository");
 
         return newFireStation;
     }
@@ -155,10 +163,12 @@ public class JsonRepository implements IDataRepository {
 
         if (fireStationInList == null){
             // No fire station to update found
+            logger.error("No fire station to update found in repository, updateFireStation stopped");
             return null;
         }
 
         fireStationInList.setStation(fireStation.getStation());
+        logger.info("Fire station updated in repository");
 
         return fireStationInList;
     }
@@ -170,13 +180,13 @@ public class JsonRepository implements IDataRepository {
 
         if (toDelete == null) {
             // No fire station matched
-            // TODO : Add log
+            logger.error("Fire station to delete not found in repository, deleteFireStation stopped");
             return;
         }
 
         // Remove the found fire station
-        // TODO : Add log
         this.fireStations.remove(toDelete);
+        logger.info("Fire station removed from repository");
     }
 
     @Override
@@ -184,12 +194,12 @@ public class JsonRepository implements IDataRepository {
         // Check if medical record already exists
         if (this.medicalRecords.stream().anyMatch(p -> p.getFirstName().equals(medicalRecord.getFirstName()) && p.getLastName().equals(medicalRecord.getLastName()))){
             // Medical record already exists, ignore add and return null
-            // TODO : Add log
+            logger.error("Medical record already exists in repository, stopped addMedicalRecord");
             return null;
         }
 
-        // TODO : Add log
         this.medicalRecords.add(medicalRecord);
+        logger.info("Medical record added to the repository");
 
         return medicalRecord;
     }
@@ -214,12 +224,15 @@ public class JsonRepository implements IDataRepository {
 
         if (medicalRecordInList == null) {
             // No medical record found to update
+            logger.error("Medical record to update not found in repository, stopped updateMedicalRecord");
             return null;
         }
 
         medicalRecordInList.setBirthdate(medicalRecord.getBirthdate());
         medicalRecordInList.setMedications(medicalRecord.getMedications());
         medicalRecordInList.setAllergies(medicalRecord.getAllergies());
+
+        logger.info("Updated medical record in repository");
 
         return medicalRecordInList;
     }
@@ -233,12 +246,12 @@ public class JsonRepository implements IDataRepository {
 
         if (toDelete == null) {
             // No medical record matched
-            // TODO : Add log
+            logger.error("Medical record to delete not found, stopped deleteMedicalRecord");
             return;
         }
 
         // Remove the found medical record
-        // TODO : Add log
         this.medicalRecords.remove(toDelete);
+        logger.info("Medical record deleted from repository");
     }
 }

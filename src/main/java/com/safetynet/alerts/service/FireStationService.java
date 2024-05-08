@@ -3,9 +3,11 @@ package com.safetynet.alerts.service;
 import com.safetynet.alerts.model.FireStation;
 import com.safetynet.alerts.repository.IDataRepository;
 import com.safetynet.alerts.service.interfaces.IFireStationService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class FireStationService implements IFireStationService {
 
     private final IDataRepository repository;

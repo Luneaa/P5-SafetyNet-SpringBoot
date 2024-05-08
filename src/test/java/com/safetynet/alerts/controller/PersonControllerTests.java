@@ -1,8 +1,6 @@
 package com.safetynet.alerts.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.safetynet.alerts.controller.PersonController;
 import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.service.PersonService;
 import org.junit.jupiter.api.Test;

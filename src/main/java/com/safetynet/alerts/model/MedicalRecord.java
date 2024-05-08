@@ -1,7 +1,11 @@
 package com.safetynet.alerts.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Data
 public class MedicalRecord {
 
@@ -15,6 +19,10 @@ public class MedicalRecord {
 
     private String[] allergies;
 
+    public MedicalRecord() {
+
+    }
+
     public MedicalRecord(String firstName, String lastName, String birthdate, String[] medications, String[] allergies) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -23,23 +31,4 @@ public class MedicalRecord {
         this.allergies = allergies;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getBirthdate() {
-        return birthdate;
-    }
-
-    public String[] getMedications() {
-        return medications;
-    }
-
-    public String[] getAllergies() {
-        return allergies;
-    }
 }
