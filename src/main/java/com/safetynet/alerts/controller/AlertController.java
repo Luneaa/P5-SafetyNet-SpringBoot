@@ -6,14 +6,11 @@ import com.safetynet.alerts.model.Person;
 import com.safetynet.alerts.service.interfaces.IFireStationService;
 import com.safetynet.alerts.service.interfaces.IMedicalRecordService;
 import com.safetynet.alerts.service.interfaces.IPersonService;
-import org.springframework.cglib.core.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Array;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
