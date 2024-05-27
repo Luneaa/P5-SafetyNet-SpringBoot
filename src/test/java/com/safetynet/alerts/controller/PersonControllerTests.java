@@ -40,7 +40,7 @@ class PersonControllerTests {
 
         when(personService.getPersons()).thenReturn(persons);
 
-        mockMvc.perform(get("/persons").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/persons/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
@@ -49,7 +49,7 @@ class PersonControllerTests {
         // Call "/persons" and get no content code
         when (personService.getPersons()).thenReturn(new ArrayList<>());
 
-        mockMvc.perform(get("/persons").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/persons/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
 
@@ -68,7 +68,7 @@ class PersonControllerTests {
         var newPerson = new Person("John", "Doe", "2 Rue des Sapins", "Pau", "1234", "+33456787512", "johndoe@gmail.com");
         when(personService.addPerson(any(Person.class))).thenReturn(newPerson);
 
-        mockMvc.perform(post("/persons", newPerson)
+        mockMvc.perform(post("/persons/", newPerson)
                 .content(objectMapper.writeValueAsString(newPerson))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -80,7 +80,7 @@ class PersonControllerTests {
         Person updatePerson = new Person("John", "Doe", "2 Rue des Sapins", "Pau", "1234", "+33456787512", "johndoe@gmail.com");
         when(personService.updatePerson(any(Person.class))).thenReturn(updatePerson);
 
-        mockMvc.perform(put("/persons", updatePerson)
+        mockMvc.perform(put("/persons/", updatePerson)
                         .content(objectMapper.writeValueAsString(updatePerson))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))

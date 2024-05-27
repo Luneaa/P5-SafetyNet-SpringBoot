@@ -22,6 +22,8 @@ public interface IDataRepository {
 
     FireStation getFireStation(String address);
 
+    List<FireStation> getFireStationsByStationNumber(String stationNumber);
+
     FireStation addFireStation(FireStation newFireStation);
 
     FireStation udpateFireStation(FireStation fireStation);

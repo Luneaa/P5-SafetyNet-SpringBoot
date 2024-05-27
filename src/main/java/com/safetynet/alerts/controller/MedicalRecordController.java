@@ -16,7 +16,7 @@ public class MedicalRecordController {
         this.medicalRecordService = medicalRecordService;
     }
 
-    @GetMapping("/medicalRecords")
+    @GetMapping("/medicalRecords/")
     public ResponseEntity<List<MedicalRecord>> getMedicalRecords() {
         var medicalRecords = medicalRecordService.getMedicalRecords();
 
@@ -38,14 +38,14 @@ public class MedicalRecordController {
         return new ResponseEntity<>(medicalRecord, HttpStatus.OK);
     }
 
-    @PostMapping("/medicalRecords")
+    @PostMapping("/medicalRecords/")
     public ResponseEntity<MedicalRecord> postMedicalRecord(@RequestBody MedicalRecord medicalRecord){
         var newMedicalRecord = medicalRecordService.addMedicalRecord(medicalRecord);
 
         return new ResponseEntity<>(newMedicalRecord, HttpStatus.OK);
     }
 
-    @PutMapping("/medicalRecords")
+    @PutMapping("/medicalRecords/")
     public ResponseEntity<MedicalRecord> putMedicalRecord(@RequestBody MedicalRecord medicalRecord){
         var updatedMedicalRecord = medicalRecordService.updateMedicalRecord(medicalRecord);
 

@@ -41,7 +41,7 @@ class FireStationControllerTests {
 
         when(fireStationService.getFireStations()).thenReturn(fireStations);
 
-        mockMvc.perform(get("/fireStations").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/fireStations/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
@@ -50,7 +50,7 @@ class FireStationControllerTests {
         // Call "/fireStations" and get no content code
         when (fireStationService.getFireStations()).thenReturn(new ArrayList<>());
 
-        mockMvc.perform(get("/fireStations").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/fireStations/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
 
@@ -69,7 +69,7 @@ class FireStationControllerTests {
         var newFireStation = new FireStation("12 Rue du Persil Heureux", "1");
         when(fireStationService.addFireStation(any(FireStation.class))).thenReturn(newFireStation);
 
-        mockMvc.perform(post("/fireStations", newFireStation)
+        mockMvc.perform(post("/fireStations/", newFireStation)
                         .content(objectMapper.writeValueAsString(newFireStation))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -81,7 +81,7 @@ class FireStationControllerTests {
         FireStation updateFireStation = new FireStation("12 Rue du Persil Heureux", "1");
         when(fireStationService.updateFireStation(any(FireStation.class))).thenReturn(updateFireStation);
 
-        mockMvc.perform(put("/fireStations", updateFireStation)
+        mockMvc.perform(put("/fireStations/", updateFireStation)
                         .content(objectMapper.writeValueAsString(updateFireStation))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))

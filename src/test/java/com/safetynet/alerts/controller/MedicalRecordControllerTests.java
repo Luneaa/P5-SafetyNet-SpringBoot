@@ -40,7 +40,7 @@ class MedicalRecordControllerTests {
 
         when(medicalRecordService.getMedicalRecords()).thenReturn(medicalRecords);
 
-        mockMvc.perform(get("/medicalRecords").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/medicalRecords/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
@@ -49,7 +49,7 @@ class MedicalRecordControllerTests {
         // Call "/medicalRecords" and get no content code
         when (medicalRecordService.getMedicalRecords()).thenReturn(new ArrayList<>());
 
-        mockMvc.perform(get("/medicalRecords").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/medicalRecords/").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
 
@@ -68,7 +68,7 @@ class MedicalRecordControllerTests {
         var newMedicalRecord = new MedicalRecord("John", "Doe", "12/12/1912", new String[] { "paracetamol:350mg" }, new String[] { "peanut" });
         when(medicalRecordService.addMedicalRecord(any(MedicalRecord.class))).thenReturn(newMedicalRecord);
 
-        mockMvc.perform(post("/medicalRecords", newMedicalRecord)
+        mockMvc.perform(post("/medicalRecords/", newMedicalRecord)
                         .content(objectMapper.writeValueAsString(newMedicalRecord))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -80,7 +80,7 @@ class MedicalRecordControllerTests {
         MedicalRecord updateMedicalRecord = new MedicalRecord("John", "Doe", "12/12/1912", new String[] { "paracetamol:350mg" }, new String[] { "peanut" });
         when(medicalRecordService.updateMedicalRecord(any(MedicalRecord.class))).thenReturn(updateMedicalRecord);
 
-        mockMvc.perform(put("/medicalRecords", updateMedicalRecord)
+        mockMvc.perform(put("/medicalRecords/", updateMedicalRecord)
                         .content(objectMapper.writeValueAsString(updateMedicalRecord))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))

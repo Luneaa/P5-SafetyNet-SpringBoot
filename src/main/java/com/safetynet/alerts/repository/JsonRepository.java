@@ -139,7 +139,12 @@ public class JsonRepository implements IDataRepository {
 
     @Override
     public FireStation getFireStation(String address) {
-        return this.fireStations.stream().filter(p -> p.getAddress().equals(address)).findFirst().orElse(null);
+        return this.fireStations.stream().filter(f -> f.getAddress().equals(address)).findFirst().orElse(null);
+    }
+
+    @Override
+    public List<FireStation> getFireStationsByStationNumber(String stationNumber) {
+        return this.fireStations.stream().filter(f -> f.getStation().equals(stationNumber)).toList();
     }
 
     @Override

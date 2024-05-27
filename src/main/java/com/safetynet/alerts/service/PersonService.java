@@ -5,6 +5,7 @@ import com.safetynet.alerts.repository.IDataRepository;
 import com.safetynet.alerts.service.interfaces.IPersonService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +23,18 @@ public class PersonService implements IPersonService {
 
     public Person getPerson(String firstName, String lastName){
         return this.repository.getPerson(firstName, lastName);
+    }
+
+    public List<Person> getPersonsByAddresses(List<String> addresses) {
+        var result = new ArrayList<Person>();
+
+        for (Person person : this.repository.getPersons()) {
+            if (addresses.contains(person.getAddress())) {
+                result.add(person);
+            }
+        }
+
+        return result;
     }
 
     public Person addPerson(Person newPerson) {

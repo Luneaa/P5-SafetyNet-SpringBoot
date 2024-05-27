@@ -16,7 +16,7 @@ public class FireStationController {
         this.fireStationService = fireStationService;
     }
 
-    @GetMapping("/fireStations")
+    @GetMapping("/fireStations/")
     public ResponseEntity<List<FireStation>> getFireStations() {
         var fireStations = fireStationService.getFireStations();
 
@@ -38,14 +38,14 @@ public class FireStationController {
         return new ResponseEntity<>(fireStation, HttpStatus.OK);
     }
 
-    @PostMapping("/fireStations")
+    @PostMapping("/fireStations/")
     public ResponseEntity<FireStation> postFireStation(@RequestBody FireStation fireStation){
         var newFireStation = fireStationService.addFireStation(fireStation);
 
         return new ResponseEntity<>(newFireStation, HttpStatus.OK);
     }
 
-    @PutMapping("/fireStations")
+    @PutMapping("/fireStations/")
     public ResponseEntity<FireStation> putFireStation(@RequestBody FireStation fireStation){
         var updatedFireStation = fireStationService.updateFireStation(fireStation);
 

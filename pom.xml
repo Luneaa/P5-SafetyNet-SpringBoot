@@ -15,6 +15,9 @@
     <description>alerts</description>
     <properties>
         <java.version>21</java.version>
+        <sonar.coverage.exclusions>
+            com/safetynet/alerts/model/*
+        </sonar.coverage.exclusions>
     </properties>
     <dependencies>
         <dependency>

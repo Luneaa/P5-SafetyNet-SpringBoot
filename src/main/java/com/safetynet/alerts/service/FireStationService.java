@@ -24,6 +24,10 @@ public class FireStationService implements IFireStationService {
         return this.repository.getFireStation(address);
     }
 
+    public List<FireStation> getFireStationsByStationNumber(String stationNumber) {
+        return this.repository.getFireStationsByStationNumber(stationNumber);
+    }
+
     public FireStation addFireStation(FireStation newFireStation) {
         return this.repository.addFireStation(newFireStation);
     }

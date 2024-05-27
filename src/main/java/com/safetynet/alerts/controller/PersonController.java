@@ -17,7 +17,7 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping("/persons")
+    @GetMapping("/persons/")
     public ResponseEntity<List<Person>> getPersons() {
         var persons = personService.getPersons();
 
@@ -39,14 +39,14 @@ public class PersonController {
         return new ResponseEntity<>(person, HttpStatus.OK);
     }
 
-    @PostMapping("/persons")
+    @PostMapping("/persons/")
     public ResponseEntity<Person> postPerson(@RequestBody Person person){
         var newPerson = personService.addPerson(person);
 
         return new ResponseEntity<>(newPerson, HttpStatus.OK);
     }
 
-    @PutMapping("/persons")
+    @PutMapping("/persons/")
     public ResponseEntity<Person> putPerson(@RequestBody Person person){
         var updatedPerson = personService.updatePerson(person);
 

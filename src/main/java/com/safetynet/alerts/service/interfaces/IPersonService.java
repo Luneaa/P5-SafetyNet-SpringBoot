@@ -12,6 +12,8 @@ public interface IPersonService {
 
     Person getPerson(String firstName, String lastName);
 
+    List<Person> getPersonsByAddresses(List<String> addresses);
+
     Person addPerson(Person person);
 
     Person updatePerson(Person person);
