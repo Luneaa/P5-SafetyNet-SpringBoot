@@ -65,6 +65,15 @@ class FireStationControllerTests {
     }
 
     @Test
+    void getFireStationNoContent() throws Exception {
+        // Call "/fireStations/{address}" and get a fireStation
+        when(fireStationService.getFireStation(any(String.class))).thenReturn(null);
+
+        mockMvc.perform(get("/fireStations/{address}", "12 Rue du Persil Heureux", "1").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
     void addFireStation() throws Exception {
         var newFireStation = new FireStation("12 Rue du Persil Heureux", "1");
         when(fireStationService.addFireStation(any(FireStation.class))).thenReturn(newFireStation);

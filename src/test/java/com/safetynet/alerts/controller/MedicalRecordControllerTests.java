@@ -64,6 +64,15 @@ class MedicalRecordControllerTests {
     }
 
     @Test
+    void getMedicalRecordNoContent() throws Exception {
+        // Call "/medicalRecords/{firstName}/{lastName}" and get a medicalRecord
+        when(medicalRecordService.getMedicalRecord(any(String.class), any(String.class))).thenReturn(null);
+
+        mockMvc.perform(get("/medicalRecords/{firstName}/{lastName}", "John", "Doe").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
     void addMedicalRecord() throws Exception {
         var newMedicalRecord = new MedicalRecord("John", "Doe", "12/12/1912", new String[] { "paracetamol:350mg" }, new String[] { "peanut" });
         when(medicalRecordService.addMedicalRecord(any(MedicalRecord.class))).thenReturn(newMedicalRecord);

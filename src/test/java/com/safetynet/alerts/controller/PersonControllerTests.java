@@ -64,6 +64,15 @@ class PersonControllerTests {
     }
 
     @Test
+    void getPersonNoContent() throws Exception {
+        // Call "/persons/{firstName}/{lastName}/{email}" and get a person
+        when(personService.getPerson(any(String.class), any(String.class), any(String.class))).thenReturn(null);
+
+        mockMvc.perform(get("/persons/{firstName}/{lastName}/{email}", "John", "Doe", "johndoe@gmail.com").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
     void addPerson() throws Exception {
         var newPerson = new Person("John", "Doe", "2 Rue des Sapins", "Pau", "1234", "+33456787512", "johndoe@gmail.com");
         when(personService.addPerson(any(Person.class))).thenReturn(newPerson);
