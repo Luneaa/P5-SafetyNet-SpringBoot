@@ -1,20 +1,20 @@
 package com.safetynet.alerts.dto;
 
-import java.util.List;
+import lombok.Getter;
 
+@Getter
 public class ChildAlertChildDto {
-    public String FirstName;
 
-    public String LastName;
+    private final String firstName;
 
-    public int Age;
+    private final String lastName;
 
-    public List<ChildAlertFamilyMemberDto> FamilyMembers;
+    private final int age;
 
-    public ChildAlertChildDto(String firstName, String lastName, int age, List<ChildAlertFamilyMemberDto> familyMembers){
-        this.FirstName = firstName;
-        this.LastName = lastName;
-        this.Age = age;
-        this.FamilyMembers = familyMembers;
+    public ChildAlertChildDto(String firstName, String lastName, int age){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
     }
+
 }

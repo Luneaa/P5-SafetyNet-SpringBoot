@@ -84,19 +84,20 @@ public class AlertController {
         // Get persons at given address
         var personsAtAddress = this.personService.getPersonsByAddresses(Collections.singletonList(address));
 
+
         // Check age
         var childrenDto = new ArrayList<ChildAlertChildDto>();
+        var familyMembersDto = new ArrayList<ChildAlertFamilyMemberDto>();
+
         for (Person person : personsAtAddress) {
             var medicalRecord = this.medicalRecordService.getMedicalRecord(person.getFirstName(), person.getLastName());
             var age = getAge(medicalRecord.getBirthdate());
             // Children are 18-
             if (age <= 18) {
-                var familyMembers = personsAtAddress.stream().filter(p -> !p.getFirstName().equals(person.getFirstName()) || !p.getLastName().equals(person.getLastName())).toList();
-                var familyMembersDto = new ArrayList<ChildAlertFamilyMemberDto>();
-                for (Person familyMember : familyMembers) {
-                    familyMembersDto.add(new ChildAlertFamilyMemberDto(familyMember.getFirstName(), familyMember.getLastName()));
-                }
-                childrenDto.add(new ChildAlertChildDto(person.getFirstName(), person.getLastName(), age, familyMembersDto));
+                childrenDto.add(new ChildAlertChildDto(person.getFirstName(), person.getLastName(), age));
+            }
+            else {
+                familyMembersDto.add(new ChildAlertFamilyMemberDto(person.getFirstName(), person.getLastName()));
             }
         }
 
@@ -104,7 +105,7 @@ public class AlertController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<>(new ChildAlertDto(childrenDto), HttpStatus.OK);
+        return new ResponseEntity<>(new ChildAlertDto(childrenDto, familyMembersDto), HttpStatus.OK);
     }
 
     @GetMapping("/phoneAlert")
@@ -140,7 +141,38 @@ public class AlertController {
         return new ResponseEntity<>(new FireStationPersonListDto(fireStation.getStation() ,personList), HttpStatus.OK);
     }
 
-    // TODO : /stations?stations=<a list of station_numbers>
+    @GetMapping("/stations")
+    public ResponseEntity<List<StationAlertDto>> stations(@RequestParam(name = "station_numbers") String[] stationNumbers){
+        var result = new ArrayList<StationAlertDto>();
+
+        for (String stationNumber : stationNumbers) {
+            var stations = this.fireStationService.getFireStationsByStationNumber(stationNumber);
+            for (FireStation station : stations){
+                // Get persons at address
+                var persons = this.personService.getPersonsByAddresses(Collections.singletonList(station.getAddress()));
+                var personsDto = new ArrayList<StationAlertPersonDto>();
+
+                for (Person person : persons) {
+                    var medicalRecord = this.medicalRecordService.getMedicalRecord(person.getFirstName(), person.getLastName());
+                    personsDto.add(
+                            new StationAlertPersonDto(person.getFirstName(),
+                                    person.getLastName(),
+                                    person.getPhone(),
+                                    getAge(medicalRecord.getBirthdate()),
+                                    medicalRecord.getMedications(),
+                                    medicalRecord.getAllergies()));
+                }
+
+                result.add(new StationAlertDto(station.getAddress(), personsDto));
+            }
+        }
+
+        if (result.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 
     @GetMapping("/personInfo")
     public ResponseEntity<PersonInfoDto> personInfo(@RequestParam String firstName, @RequestParam String lastName){

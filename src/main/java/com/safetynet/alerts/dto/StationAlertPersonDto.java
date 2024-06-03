@@ -3,8 +3,7 @@ package com.safetynet.alerts.dto;
 import lombok.Getter;
 
 @Getter
-public class PersonInfoDto {
-
+public class StationAlertPersonDto {
     private final String firstName;
 
     private final String lastName;
@@ -17,7 +16,7 @@ public class PersonInfoDto {
 
     private final String[] allergies;
 
-    public PersonInfoDto(String firstName, String lastName, String phoneNumber, int age, String[] medications, String[] allergies) {
+    public StationAlertPersonDto(String firstName, String lastName, String phoneNumber, int age, String[] medications, String[] allergies) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -25,5 +24,4 @@ public class PersonInfoDto {
         this.medications = medications;
         this.allergies = allergies;
     }
-
 }

@@ -1,17 +1,22 @@
 package com.safetynet.alerts.dto;
 
+import lombok.Getter;
+
 import java.util.List;
 
+@Getter
 public class PersonGroupDto {
-    public int AdultCount;
 
-    public int ChildCount;
+    private final int adultCount;
 
-    public List<PersonDto> Persons;
+    private final int childCount;
+
+    private final List<PersonDto> persons;
 
     public PersonGroupDto(List<PersonDto> persons, int adultCount, int childCount) {
-        this.Persons = persons;
-        this.AdultCount = adultCount;
-        this.ChildCount = childCount;
+        this.persons = persons;
+        this.adultCount = adultCount;
+        this.childCount = childCount;
     }
+
 }

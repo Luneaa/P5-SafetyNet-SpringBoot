@@ -1,24 +1,29 @@
 package com.safetynet.alerts.dto;
 
+import lombok.Getter;
+
+@Getter
 public class PersonFireStationDto {
-    public String FirstName;
 
-    public String LastName;
+    private final String firstName;
 
-    public String PhoneNumber;
+    private final String lastName;
 
-    public int Age;
+    private final String phoneNumber;
 
-    public String[] Medications;
+    private final int age;
 
-    public String[] Allergies;
+    private final String[] medications;
+
+    private final String[] allergies;
 
     public PersonFireStationDto(String firstName, String lastName, String phoneNumber, int age, String[] medications, String[] allergies) {
-        this.FirstName = firstName;
-        this.LastName = lastName;
-        this.PhoneNumber = phoneNumber;
-        this.Age = age;
-        this.Medications = medications;
-        this.Allergies = allergies;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.age = age;
+        this.medications = medications;
+        this.allergies = allergies;
     }
+
 }

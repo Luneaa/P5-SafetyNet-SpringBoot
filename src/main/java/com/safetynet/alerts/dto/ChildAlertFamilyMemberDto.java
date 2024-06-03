@@ -1,13 +1,16 @@
 package com.safetynet.alerts.dto;
 
+import lombok.Getter;
+
+@Getter
 public class ChildAlertFamilyMemberDto {
 
-    public String FirstName;
+    private final String firstName;
 
-    public String LastName;
+    private final String lastName;
 
     public ChildAlertFamilyMemberDto(String firstName, String lastName) {
-        this.FirstName = firstName;
-        this.LastName = lastName;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 }

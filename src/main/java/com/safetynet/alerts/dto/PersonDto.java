@@ -1,20 +1,24 @@
 package com.safetynet.alerts.dto;
 
 import com.safetynet.alerts.model.Person;
+import lombok.Getter;
 
+@Getter
 public class PersonDto {
-    public String FirstName;
 
-    public String LastName;
+    private final String firstName;
 
-    public String Address;
+    private final String lastName;
 
-    public String PhoneNumber;
+    private final String address;
+
+    private final String phoneNumber;
 
     public PersonDto(Person person) {
-        this.FirstName = person.getFirstName();
-        this.LastName = person.getLastName();
-        this.Address = person.getAddress();
-        this.PhoneNumber = person.getPhone();
+        this.firstName = person.getFirstName();
+        this.lastName = person.getLastName();
+        this.address = person.getAddress();
+        this.phoneNumber = person.getPhone();
     }
+
 }
