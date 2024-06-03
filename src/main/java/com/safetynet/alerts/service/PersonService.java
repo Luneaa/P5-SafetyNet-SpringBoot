@@ -21,8 +21,12 @@ public class PersonService implements IPersonService {
         return this.repository.getPersons();
     }
 
-    public Person getPerson(String firstName, String lastName){
-        return this.repository.getPerson(firstName, lastName);
+    public Person getPerson(String firstName, String lastName, String email){
+        return this.repository.getPerson(firstName, lastName, email);
+    }
+
+    public List<Person> getPersons(String firstName, String lastName) {
+        return this.repository.getPersons().stream().filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName)).toList();
     }
 
     public List<Person> getPersonsByAddresses(List<String> addresses) {

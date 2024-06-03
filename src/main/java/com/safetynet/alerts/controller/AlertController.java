@@ -175,16 +175,25 @@ public class AlertController {
     }
 
     @GetMapping("/personInfo")
-    public ResponseEntity<PersonInfoDto> personInfo(@RequestParam String firstName, @RequestParam String lastName){
-        var person = this.personService.getPerson(firstName, lastName);
-        var medicalRecord = this.medicalRecordService.getMedicalRecord(firstName, lastName);
+    public ResponseEntity<List<PersonInfoDto>> personInfo(@RequestParam String firstName, @RequestParam String lastName){
+        var persons = this.personService.getPersons(firstName, lastName);
+        var result = new ArrayList<PersonInfoDto>();
 
-        var result = new PersonInfoDto(person.getFirstName(),
-                                       person.getLastName(),
-                                       person.getPhone(),
-                                       getAge(medicalRecord.getBirthdate()),
-                                       medicalRecord.getMedications(),
-                                       medicalRecord.getAllergies());
+        for (Person person : persons) {
+            var medicalRecord = this.medicalRecordService.getMedicalRecord(firstName, lastName);
+
+            result.add(new PersonInfoDto(person.getFirstName(),
+                    person.getLastName(),
+                    person.getPhone(),
+                    getAge(medicalRecord.getBirthdate()),
+                    medicalRecord.getMedications(),
+                    medicalRecord.getAllergies()));
+
+        }
+
+        if (result.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

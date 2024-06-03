@@ -28,9 +28,9 @@ public class PersonController {
         return new ResponseEntity<>(persons, HttpStatus.OK);
     }
 
-    @GetMapping("/persons/{firstName}/{lastName}")
-    public ResponseEntity<Person> getPerson(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName){
-        var person = personService.getPerson(firstName, lastName);
+    @GetMapping("/persons/{firstName}/{lastName}/{email}")
+    public ResponseEntity<Person> getPerson(@PathVariable("firstName") String firstName, @PathVariable("lastName") String lastName, @PathVariable("email") String email){
+        var person = personService.getPerson(firstName, lastName, email);
 
         if (person == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -86,8 +86,8 @@ public class JsonRepository implements IDataRepository {
     }
 
     @Override
-    public Person getPerson(String firstName, String lastName) {
-        return this.persons.stream().filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName)).findFirst().orElse(null);
+    public Person getPerson(String firstName, String lastName, String email) {
+        return this.persons.stream().filter(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName) && p.getEmail().equals(email)).findFirst().orElse(null);
     }
 
     // Update

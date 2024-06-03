@@ -12,7 +12,7 @@ public interface IDataRepository {
 
     List<Person> getPersons();
 
-    Person getPerson(String firstName, String lastName);
+    Person getPerson(String firstName, String lastName, String email);
 
     Person udpatePerson(Person person);
 

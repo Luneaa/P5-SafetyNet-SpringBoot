@@ -10,7 +10,9 @@ import java.util.List;
 public interface IPersonService {
     List<Person> getPersons();
 
-    Person getPerson(String firstName, String lastName);
+    Person getPerson(String firstName, String lastName, String email);
+
+    List<Person> getPersons(String firstName, String lastName);
 
     List<Person> getPersonsByAddresses(List<String> addresses);
 

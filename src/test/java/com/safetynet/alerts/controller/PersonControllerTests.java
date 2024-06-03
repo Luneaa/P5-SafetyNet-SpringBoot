@@ -55,11 +55,11 @@ class PersonControllerTests {
 
     @Test
     void getPerson() throws Exception {
-        // Call "/persons/{firstName}/{lastName}" and get a person
+        // Call "/persons/{firstName}/{lastName}/{email}" and get a person
         var person = new Person("John", "Doe", "2 Rue des Sapins", "Pau", "1234", "+33456787512", "johndoe@gmail.com");
-        when(personService.getPerson(any(String.class), any(String.class))).thenReturn(person);
+        when(personService.getPerson(any(String.class), any(String.class), any(String.class))).thenReturn(person);
 
-        mockMvc.perform(get("/persons/{firstName}/{lastName}", "John", "Doe").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/persons/{firstName}/{lastName}/{email}", "John", "Doe", "johndoe@gmail.com").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
