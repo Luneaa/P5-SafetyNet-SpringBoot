@@ -93,7 +93,7 @@ public class JsonRepository implements IDataRepository {
     // Update
 
     @Override
-    public Person udpatePerson(Person person) {
+    public Person updatePerson(Person person) {
         Person personInList = this.persons.stream().filter(p -> p.getFirstName().equals(person.getFirstName()) && p.getLastName().equals(person.getLastName())).findFirst().orElse(null);
 
         if (personInList == null){
@@ -163,7 +163,7 @@ public class JsonRepository implements IDataRepository {
     }
 
     @Override
-    public FireStation udpateFireStation(FireStation fireStation) {
+    public FireStation updateFireStation(FireStation fireStation) {
         FireStation fireStationInList = this.fireStations.stream().filter(p -> p.getAddress().equals(fireStation.getAddress())).findFirst().orElse(null);
 
         if (fireStationInList == null){

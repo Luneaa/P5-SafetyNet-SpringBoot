@@ -14,7 +14,7 @@ public interface IDataRepository {
 
     Person getPerson(String firstName, String lastName, String email);
 
-    Person udpatePerson(Person person);
+    Person updatePerson(Person person);
 
     void deletePerson(String firstName, String lastName);
 
@@ -26,7 +26,7 @@ public interface IDataRepository {
 
     FireStation addFireStation(FireStation newFireStation);
 
-    FireStation udpateFireStation(FireStation fireStation);
+    FireStation updateFireStation(FireStation fireStation);
 
     void deleteFireStation(String address, String station);
 

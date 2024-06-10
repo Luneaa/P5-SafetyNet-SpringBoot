@@ -33,12 +33,12 @@ public class FireStationService implements IFireStationService {
     }
 
     public FireStation updateFireStation(FireStation fireStation) {
-        return this.repository.udpateFireStation(fireStation);
+        return this.repository.updateFireStation(fireStation);
     }
 
 
-    public void deleteFireStation(String firstName, String lastName) {
-        this.repository.deleteFireStation(firstName, lastName);
+    public void deleteFireStation(String address, String station) {
+        this.repository.deleteFireStation(address, station);
     }
 
 }

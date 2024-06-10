@@ -46,7 +46,7 @@ public class PersonService implements IPersonService {
     }
 
     public Person updatePerson(Person person) {
-        return this.repository.udpatePerson(person);
+        return this.repository.updatePerson(person);
     }
 
 
