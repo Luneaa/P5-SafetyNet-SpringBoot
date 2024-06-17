@@ -21,4 +21,10 @@ public class PersonDto {
         this.phoneNumber = person.getPhone();
     }
 
+    public PersonDto(String firstName, String lastName, String address, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
 }

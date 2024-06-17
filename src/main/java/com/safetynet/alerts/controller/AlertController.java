@@ -111,7 +111,7 @@ public class AlertController {
     @GetMapping("/phoneAlert")
     public ResponseEntity<List<String>> phoneAlert(@RequestParam String firestation) {
         var fireStations = this.fireStationService.getFireStationsByStationNumber(firestation);
-        var persons = this.personService.getPersonsByAddresses(fireStations.stream().map(f -> f.getAddress()).toList());
+        var persons = this.personService.getPersonsByAddresses(fireStations.stream().map(FireStation::getAddress).toList());
         List<String> result = new ArrayList<>();
 
         for (Person person : persons) {
@@ -204,7 +204,7 @@ public class AlertController {
         List<String> result = new ArrayList<>();
 
         for (Person person : persons) {
-            if (person.getCity().equals(city)){
+            if (person.getCity().equals(city) && !result.contains(person.getEmail())){
                 result.add(person.getEmail());
             }
         }
